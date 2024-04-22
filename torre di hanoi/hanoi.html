@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="it">
+	<head>
+		<title>La Torre di Hanoi</title>
+		<link rel="icon" type="image/png" href="favicon.png"> <!-- Inserimento della favicon vicino al titolo -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">	<!-- Integrazione CSS Bootstrap -->
+		<link rel="stylesheet" href="stili.css" > <!-- Inserire al posto di mystyle.css il nome del file del proprio CSS -->
+		<style>
+			
+			
+		
+		</style>
+	</head>
+	<body>
+		<header>
+			<!-- Intestazione -->
+			<center><h1>La Torre di Hanoi</h1></center>
+		</header>
+		<main>
+		
+		<h2 style="margin-left:101px"> Le Origini</h2>
+		<div class="container" style="border: 1px solid black;
+				border-radius: 10px;">
+			<div class="row">
+				<div class="col-3">
+					<img src="Lucas.jpg" alt="Edouard Lucas" style="margin-top:12px;margin-bottom:12px">
+				</div>
+				<div class="col-9">
+					<center><p style="text-align: justify; margin-top: 67px;  font-size: 14.5pt">
+						Il gioco fu inventato nel 1883 dal matematico francese Édouard Lucas 
+						che diffuse il gioco sotto lo pseudonimo di N. Claus de Siam, mandarino del collegio di Li-Sou-Stian.
+						La leggenda secondo la quale in un tempio Indù alcuni monaci sono costantemente impegnati a spostare 
+						su tre colonne di diamante 64 dischi d'oro secondo le regole della Torre. 
+						La leggenda narra che quando i monaci completeranno il lavoro, il mondo finirà. 
+						Il numero minimo di mosse necessarie per risolvere il gioco equivale infatti 
+						a 2 elevato al numero di dischi meno 1. I monaci della leggenda dovranno quindi compiere 18.446.744.073.709.551.615 mosse (2^64 - 1), 
+						compiendo una mossa al secondo il mondo finirà tra 5.845.580.504 secoli.
+
+
+					</p></center>
+				</div>
+			</div>
+		</div>
+		
+		<div class="container" style="margin-top: 50px">
+		<hr>
+			<div class="row" style="margin-top: 50px">
+			
+			<div class="col-6">
+				<h2> Cos'è la Torre di Hanoi?</h2>
+				<div style="border: 1px solid black;
+				border-radius: 10px; height:226px">
+					<center><p style="padding: 17px; text-align: justify; font-size: 14.5pt">
+					La Torre di Hanoi è un rompicapo matematico composto da tre paletti 
+					e un certo numero di dischi di grandezza decrescente, 
+					che possono essere infilati in uno qualsiasi dei paletti.
+					</p></center>
+				</div>
+			</div>
+				
+				
+				<div class="col-6">
+					<h2 style="margin-left:"> Come si gioca?</h2>
+					<div style="border: 1px solid black;
+				border-radius: 10px;">
+					<center><p style="padding: 17px; text-align: justify; font-size: 14.5pt">
+					Il gioco inizia con tutti i dischi incolonnati su un paletto in ordine decrescente, 
+					in modo da formare un cono. Lo scopo del gioco è portare tutti i dischi su un paletto diverso, 
+					potendo spostare solo un disco alla volta e potendo mettere un disco solo su un altro disco più grande, 
+					mai su uno più piccolo.
+					</p></center>
+				</div>
+				</div>
+			</div>
+		</div>
+			<div style="background-color:green; margin-top:50px; 
+			margin-right: 400px; 
+			margin-left: 400px;
+			border-radius: 10px;">
+				<center><h2 style="padding: 25px; color: white">&#8595 GIOCACI ORA! &#8595 </h2></center>
+			</div>
+			<div class="container">
+				<div class="row" style="margin:30px; height:125px">
+					<h2>Contatore mosse: <a id="clicks">0</a></h2>
+				</div>
+				<center><div class="row">
+					<div id="pole1" class="col-4">	
+					
+					</div>
+					<div id="pole2" class="col-4">
+					
+					</div>
+					<div id="pole3" class="col-4">
+					
+					</div>
+				</div></center>
+				<img src="legno.jpg" class="d-block w-100" alt="piano" height="35" style="border-radius: 9px;">
+				<div class="row" style="margin-top:20px;">
+					<div class="col-4">
+						<center><button id="btn1" class="btn btn-primary" onclick="actionPole(1);">Prendi</button></center>
+					</div>
+					<div class="col-4">
+						<center><button id="btn2" class="btn btn-primary" onclick="actionPole(2)">Prendi</button></center>
+					</div>
+					<div class="col-4">
+						<center><button id="btn3" class="btn btn-primary" onclick="actionPole(3)">Prendi</button></center>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-4"></div>
+					<div id="myHand" class="col-4"></div>
+					<div class="col-4"></div>
+				</div>
+			</div>
+			
+			
+		</main>
+		<footer>
+			<!-- Pedice -->
+			<center><p>&copy; Ramundo Pietro</p></center>
+		</footer>
+	</body>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script> <!-- Integrazione Javascript Bootstrap -->
+	<script>
+		var pole1 = [1,2,3];
+		var pole2 = [];
+		var pole3 = [];
+		var mano = 0;
+		
+		var clicks = 0;
+		
+		drawScene();
+		
+		function drawScene(){
+			drawPoles();
+			drawDisk();
+			drawHand();
+			checkButtons();
+		}
+		
+		function vittoria(){
+			
+			if(pole3.every()){
+			
+				clicks += 100;
+				document.getElementById("clicks").innerHTML = clicks;
+			}
+		}
+		
+		function drawPoles(){
+			for(let i=1;i<4;i++){
+				drawPole(getPole(i), getDivPole(i));
+			}
+		}
+		
+		
+		
+		function getDivPole(n){
+			return document.getElementById("pole"+n);
+		}
+		
+		function drawPole(pole, div){
+			div.innerHTML = "";
+			for(let i=0; i<pole.length; i++){
+				div.innerHTML+=drawDisk(pole[i]);
+			}
+		}
+		
+		function checkButtons(){
+			for(let i=1;i<4;i++)
+				checkButton(i);
+		}	
+
+		function getPole(n){
+			switch(n){
+				case 1: return pole1;
+				case 2: return pole2;
+				case 3: return pole3;
+			}
+		}
+		
+		function click(){
+		
+			
+			++clicks;
+			document.getElementById("clicks").innerHTML = clicks;
+		
+
+		}
+		
+		function checkButton(n){
+			let button = document.getElementById("btn" + n);
+			let pole = getPole(n);
+			if(mano==0){
+				button.innerText = "Prendi";
+				button.disabled = pole.length == 0;
+			} else {
+				button.innerText = "Metti";				
+				button.disabled = pole.length > 0 ? pole[0] < mano : false;			
+			}
+		}
+		
+		function drawHand(){
+			let handDiv = document.getElementById("myHand");
+			handDiv.innerHTML = drawDisk(mano);
+		}
+		
+		
+		
+		function actionPole(n){
+		
+			if(mano==0){
+				mano = getPole(n).shift();
+				click();
+			} else {
+				getPole(n).unshift(mano);
+				mano = 0;
+			}
+			
+			drawScene();
+			
+		}
+		
+		function getColor(dimension){
+			let color = "#2a88f4";
+			switch(dimension){
+				case 1: color = "#ffb63d"; break;
+				case 2: color = "#f9fd34"; break;		
+				//case 3: color = "#00FF00"; break;
+			}
+			return color;
+		}
+		
+		function drawDisk(dimension){
+			let color = getColor(dimension);
+			return '<div class="disk" style="background-color:'+color+'; width:'+dimension*15+'%;"></div>';
+		}
+		
+		
+		
+	</script>
+</html>
