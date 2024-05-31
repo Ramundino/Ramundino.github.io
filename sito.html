@@ -1,0 +1,139 @@
+<html>
+   <head>
+      <title>Tris</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+      <link rel="stylesheet" href="stile.css" >
+   </head>
+   <body style="background-image: url(legnoo.jpg); background-size:cover; color:white">
+      <header>
+         <h1>Gioca a tris ora!</h1>
+      </header>
+      <main>
+	  <center>
+	  <div class="container">
+		<div class="row" style="margin:30px; height:125px">
+			<div class="col">
+				<h2>Vittorie di ✖ : <a id="vittorieX">0</a></h2>
+			</div>
+			<div class="col">
+				<h2>Vittorie di ⭕ : <a id="vittorieO">0</a></h2>
+			</div>
+		</div>
+	  </div>
+	  </center>
+         <table>
+            <tr>
+               <td onclick="mossa(0, 0)"></td>
+               <td onclick="mossa(0, 1)"></td>
+               <td onclick="mossa(0, 2)"></td>
+            </tr>
+            <tr>
+               <td onclick="mossa(1, 0)"></td>
+               <td onclick="mossa(1, 1)"></td>
+               <td onclick="mossa(1, 2)"></td>
+            </tr>
+            <tr>
+               <td onclick="mossa(2, 0)"></td>
+               <td onclick="mossa(2, 1)"></td>
+               <td onclick="mossa(2, 2)"></td>
+            </tr>
+         </table>
+      </main>
+	  <footer>
+			<!-- Pedice -->
+			<center><p style="margin-top:100px"> &copy; Ramundo Pietro</p></center>
+			<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+		</footer>
+   </body>
+</html>
+</html> 
+<script>
+   const ics = "✖";
+   const cerchio = "⭕";
+   var giocatore = ics;
+   var vittorieX = 0;
+   var vittorieO = 0;
+   var schema = [
+     ['', '', ''],
+     ['', '', ''],
+     ['', '', '']
+   ];
+   
+   function mossa(x, y) {
+     if (schema[x][y] === '') {
+   	schema[x][y] = giocatore;
+   	let cell = document.getElementsByTagName('td')[x * 3 + y];
+   	cell.innerText = giocatore;
+	
+   
+      
+   	if (vittoria()) {
+	  
+	  
+	  alert(cell.innerText + ' ha vinto');
+	  resetGioco();
+   	  
+   
+      
+   	} else if (pareggio()) {
+   	  alert('Pareggio');
+   	  resetGioco();
+   	} else {
+   
+   	  giocatore = giocatore == ics ? cerchio : ics;
+   	}
+	
+     }
+     
+   }
+   
+   
+   function vittoria() {
+     for (let i = 0; i < 3; i++) {
+   	if (
+   	  (schema[i][0] !== '' && schema[i][0] === schema[i][1] && schema[i][0] === schema[i][2]) ||
+   	  (schema[0][i] !== '' && schema[0][i] === schema[1][i] && schema[0][i] === schema[2][i])
+   	) {
+   	  return true;
+   	}
+     }
+     if (
+   	(schema[0][0] !== '' && schema[0][0] === schema[1][1] && schema[0][0] === schema[2][2]) ||
+   	(schema[0][2] !== '' && schema[0][2] === schema[1][1] && schema[0][2] === schema[2][0])
+     ) {
+   	return true;
+     }
+     return false;
+   }
+   
+   
+   function pareggio() {
+     for (let row = 0; row < 3; row++) {
+   	for (let col = 0; col < 3; col++) {
+   	  if (schema[row][col] === '') {
+   		return false;
+   	  }
+   	}
+     }
+     return true;
+   }
+   
+   
+   
+   
+   function resetGioco() {
+     schema = [
+   	['', '', ''],
+   	['', '', ''],
+   	['', '', '']
+     ];
+     giocatore = ics;
+     let cells = document.getElementsByTagName('td');
+     for (let i = 0; i < cells.length; i++) {
+   	cells[i].innerText = '';
+     }
+   }
+   
+   
+</script>
+</html>
